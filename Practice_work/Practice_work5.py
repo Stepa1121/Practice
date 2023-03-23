@@ -43,9 +43,9 @@ def delete_user():  # Function for delete person
         raise NameError("Such name not in list")
 
 
-def get_user():
+def get_user():  # Function for output attribute.
     name = input('Enter the name: ').title()
-    attr = dict([(1, 'age'), (2, 'orientation'), (3, 'professioanl')])
+    attr = dict([(1, 'age'), (2, 'orientation'), (3, 'profession')])
     if name in People.people:
             atr = int(input('1 - age\n2 - orientation\n3 - profession\nAnswer: '))
             print(People.people[name].get(attr[atr]))
@@ -58,10 +58,19 @@ def get_user():
 
 def set_user():
     name = input('Enter the name: ').title()
+    attr = dict([(1, 'age'), (2, 'orientation'), (3, 'profession')])
     if name in People.people:
-        atr = input('Enter the atr: ')
-        value = input('Enter the value: ')
-        People.people[name].set(atr, value)
+        atr = int(input('1 - age\n2 - orientation\n3 - profession\nAnswer: '))
+        if atr == 1:
+            value = int(input('Enter the value: '))
+        else:
+            value = input('Enter the value: ')
+        People.people[name].set(attr[atr], value)
+        user = int(input('Continue: 1 - Yes\n2 - No\nAnswer: '))
+        if user == 1:
+            set_user()
+    else:
+        raise NameError
 
 
 def menu():
