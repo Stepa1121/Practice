@@ -19,6 +19,7 @@ class Snow:
 
     def __truediv__(self, other):
         self.count = floor(self.count/other)
+        print('The number of snowflakes has been reduced!')
 
     def MakeSnow(self, k):
         num = self.count
@@ -32,3 +33,10 @@ class Snow:
     def __call__(self, n):
         self.count = n
         print('The number of snowflakes is overwritten')
+
+
+s = Snow(10)
+s * 10
+s.MakeSnow(100)
+s / 50
+s.MakeSnow(2)
