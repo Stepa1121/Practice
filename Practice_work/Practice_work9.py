@@ -9,18 +9,24 @@ class CyLinder:
         return round(circle*2+side, 2)
 
     def __init__(self, diameter, high):
-        self.dia = diameter
-        self.h = high
-        self.__area = self.Make_area(diameter, high)
+        self.__dict__['dia'] = diameter
+        self.__dict__['h'] = high
+        self.__dict__['area'] = self.Make_area(diameter, high)
 
     def __setattr__(self, key, value):
-        if key in (f'_{self.__class__.__name__}__area', 'dia', 'h'):
-            self.__dict__[key] = value
-            if hasattr(self, f'_{self.__class__.__name__}__area') and hasattr(self, 'dia') and hasattr(self, 'h'):
-                self.__dict__[f'_{self.__class__.__name__}__area'] = self.Make_area(self.dia, self.h)
+        if key == 'dia':
+            self.__dict__['dia'] = value
+            self.__dict__['area'] = self.Make_area(self.__dict__['dia'], self.__dict__['h'])
+        elif key == 'h':
+            self.__dict__['h'] = value
+            self.__dict__['area'] = self.Make_area(self.__dict__['dia'], self.__dict__['h'])
+        elif key == 'area':
+            print("You can't change area directly")
+        else:
+            print("Can't create new attributes")
 
     def show_area(self):
-        print(self.__area)
+        print(self.__dict__['area'])
 
 
 s = CyLinder(10, 10)
